@@ -16,18 +16,27 @@ class Tasks
         }
     }
 
+    /// <summary>
+    /// Removes an arbitrary amount of tasks by indices.
+    /// </summary>
+    /// <param name="indices">The tasks to remove given their indices.</param>
     public void RemoveTaskByIndex(params int[] indices)
     {
+        var count = 0;
         foreach (var index in indices)
         {
-            TaskList.RemoveAt(index);
+            // When an element from a list is deleted all
+            // index positions are shifted by the current
+            // iteration - 1
+            TaskList.RemoveAt(index - count);
+            count++;
         }
     }
 
     /// <summary>
-    /// Removes an arbitrary amount of tasks from the list.
+    /// Removes an arbitrary amount of tasks from the list by name/value.
     /// </summary>
-    /// <param name="task">The tasks to remove.</param>
+    /// <param name="task">The tasks to remove given their names.</param>
     public void RemoveTaskByName(params string[] tasks)
     {
         foreach(var task in tasks)
