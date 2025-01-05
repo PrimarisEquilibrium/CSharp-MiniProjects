@@ -1,4 +1,4 @@
-﻿using TaskManager;
+﻿using TaskTracker.Tasks;
 
 namespace TaskTracker.UnitTests;
 
@@ -7,7 +7,7 @@ public class TestTasks
     [Fact]
     public void CanAddTask()
     {
-        var task = new Tasks();
+        var task = new TasksManager();
 
         task.AddTask("x");
 
@@ -18,7 +18,7 @@ public class TestTasks
     [Fact]
     public void CanAddMultipleTask()
     {
-        var task = new Tasks();
+        var task = new TasksManager();
 
         task.AddTask("x", "y");
 
@@ -30,7 +30,7 @@ public class TestTasks
     [Fact]
     public void CanRemoveTaskByIndex()
     {
-        var task = new Tasks();
+        var task = new TasksManager();
 
         task.AddTask("x");
         task.AddTask("y");
@@ -45,7 +45,7 @@ public class TestTasks
     [Fact]
     public void CanRemoveMultipleTaskByIndex()
     {
-        var task = new Tasks();
+        var task = new TasksManager();
 
         task.AddTask("x");
         task.AddTask("y");
@@ -61,7 +61,7 @@ public class TestTasks
     [Fact]
     public void CanRemoveTaskByName()
     {
-        var task = new Tasks();
+        var task = new TasksManager();
 
         task.AddTask("x");
         task.AddTask("y");
@@ -76,7 +76,7 @@ public class TestTasks
     [Fact]
     public void CanRemoveMultipleTaskByName()
     {
-        var task = new Tasks();
+        var task = new TasksManager();
 
         task.AddTask("x");
         task.AddTask("y");
@@ -93,7 +93,7 @@ public class TestTasks
     [Fact]
     public void DisplayTasksOutputsAllTasks()
     {
-        var task = new Tasks();
+        var task = new TasksManager();
         var stringWriter = new StringWriter();
         Console.SetOut(stringWriter);
 

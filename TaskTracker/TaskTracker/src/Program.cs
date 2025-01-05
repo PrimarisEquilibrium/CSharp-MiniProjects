@@ -1,8 +1,9 @@
 ﻿using TaskTracker.Utilities;
+using TaskTracker.Tasks;
 
 Console.WriteLine("Task Tracker CLI Application");
 
-var tasks = new TaskManager.Tasks();
+var tasks = new TasksManager();
 
 while (true)
 {

@@ -1,4 +1,4 @@
-namespace TaskManager;
+namespace TaskTracker.Tasks;
 
 /// <summary>
 /// An enum representing the status of a task.
@@ -16,11 +16,11 @@ public struct Task(string content, TaskStatus status)
     public TaskStatus Status {get; set;} = status;
 }
 
-public class Tasks
+public class TasksManager
 {
     public List<Task> TaskList = [];
 
-    public Tasks() {}
+    public TasksManager() {}
 
     /// <summary>
     /// Adds an arbitrary amount of tasks to the list.
