@@ -10,7 +10,7 @@
 //     }
 // }
 
-var tasks = new Tasks();
+var tasks = new TaskManager.Tasks();
 tasks.AddTask("Brush teeth", "Make breakfast", "Make bed");
 tasks.RemoveTaskByName("Brush teeth");
 tasks.RemoveTaskByIndex(0);
