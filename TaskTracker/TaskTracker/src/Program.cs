@@ -56,9 +56,11 @@ while (true)
             }
             Console.WriteLine("Successfully deleted task");
             break;
-        case "inprogress":
+        case "mark-todo":
             break;
-        case "complete":
+        case "mark-inprogress":
+            break;
+        case "mark-done":
             break;
         default:
             Console.WriteLine("Invalid input, type `help` for valid commands.");
@@ -82,8 +84,9 @@ while (true)
             update <index> <newContent>
             delete <index>
             view
-            inprogress <index>
-            complete <index>
+            mark-todo <index>
+            mark-inprogress <index>
+            mark-done <index>
             exit
             ");
             break;

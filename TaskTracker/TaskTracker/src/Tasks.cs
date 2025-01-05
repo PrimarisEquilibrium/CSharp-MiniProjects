@@ -5,8 +5,8 @@ namespace TaskTracker.Tasks;
 /// </summary>
 public enum TaskStatus
 {
-    Incomplete,
-    Active,
+    Todo,
+    Inprogress,
     Done
 }
 
@@ -30,7 +30,7 @@ public class TasksManager
     {
         foreach (var task in tasks)
         {
-            TaskList.Add(new Task(task, TaskStatus.Incomplete));
+            TaskList.Add(new Task(task, TaskStatus.Todo));
         }
     }
 
