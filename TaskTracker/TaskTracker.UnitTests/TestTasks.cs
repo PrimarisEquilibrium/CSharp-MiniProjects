@@ -68,7 +68,45 @@ public class TestTasks
         task.AddTask("z");
 
         task.UpdateTask(0, "w");
+
         Assert.Equal("w", task.TaskList[0].Content);
+    }
+
+    [Fact]
+    public void CanMarkTodo()
+    {
+        var task = new TasksManager();
+
+        task.AddTask("x");
+
+        task.MarkInProgress(0);
+        task.MarkTodo(0);
+
+        Assert.Equal(Tasks.TaskStatus.Todo, task.TaskList[0].Status);
+    }
+
+    [Fact]
+    public void CanMarkInProgress()
+    {
+        var task = new TasksManager();
+
+        task.AddTask("x");
+
+        task.MarkInProgress(0);
+
+        Assert.Equal(Tasks.TaskStatus.Inprogress, task.TaskList[0].Status);
+    }
+
+    [Fact]
+    public void CanMarkDone()
+    {
+        var task = new TasksManager();
+
+        task.AddTask("x");
+
+        task.MarkDone(0);
+
+        Assert.Equal(Tasks.TaskStatus.Done, task.TaskList[0].Status);
     }
 
     [Fact]
