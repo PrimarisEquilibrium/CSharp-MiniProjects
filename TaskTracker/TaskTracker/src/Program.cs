@@ -22,9 +22,6 @@ while (true)
         continue;
     }
 
-    Console.WriteLine("[DEBUG]: `{cmd: " + command + "} {arg: " + argument + "}`");
-    tasks.DisplayTasks();
-
     // Commands with arguments
     if (argument != "")
     {
@@ -35,17 +32,27 @@ while (true)
             Console.WriteLine("Successfully added task");
             break;
         case "update":
+            // Update command contains an index and new content as arguments
+            var (stringIndex, newContent) = Utils.ParseCommand(argument);
+            if (int.TryParse(stringIndex, out int index))
+            {
+                tasks.UpdateTask(index - 1, newContent);
+            }
+            else
+            {
+                Console.WriteLine("Couldn't parse `" + stringIndex + "` into an integer.");
+            }
             break;
         case "delete":
             if (int.TryParse(argument, out int result))
             {
                 // Task number uses one-based indexing
                 // Convert to zero-based indexing
-                tasks.RemoveTaskByIndex(result - 1);
+                tasks.RemoveTask(result - 1);
             }
             else
             {
-                tasks.RemoveTaskByName(argument);
+                Console.WriteLine("Couldn't parse `" + argument + "` into an integer.");
             }
             Console.WriteLine("Successfully deleted task");
             break;
@@ -64,6 +71,7 @@ while (true)
         switch(command)
     {
         case "view":
+            tasks.DisplayTasks();
             break;
         case "exit":
             System.Environment.Exit(1);
@@ -71,11 +79,12 @@ while (true)
         case "help":
             Console.WriteLine(@"
             add <task>
-            update <task/index>
-            delete <task/index>
+            update <index> <newContent>
+            delete <index>
             view
-            inprogress <task/index>
-            complete <task/index>
+            inprogress <index>
+            complete <index>
+            exit
             ");
             break;
         default:

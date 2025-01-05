@@ -38,7 +38,7 @@ public class TasksManager
     /// Removes an arbitrary amount of tasks by indices.
     /// </summary>
     /// <param name="indices">The tasks to remove given their indices.</param>
-    public void RemoveTaskByIndex(params int[] indices)
+    public void RemoveTask(params int[] indices)
     {
         var count = 0;
         foreach (var index in indices)
@@ -52,15 +52,13 @@ public class TasksManager
     }
 
     /// <summary>
-    /// Removes an arbitrary amount of tasks from the list by name/value.
+    /// Updates the content of the indexed task.
     /// </summary>
-    /// <param name="tasks">The tasks to remove given their names.</param>
-    public void RemoveTaskByName(params string[] tasks)
+    /// <param name="index">The index of the task.</param>
+    /// <param name="newContent">The new content of the task.</param>
+    public void UpdateTask(int index, string newContent)
     {
-        foreach(var task in tasks)
-        {
-            TaskList = TaskList.Where(t => t.Content != task).ToList();
-        }
+        TaskList[index] = new Task(newContent, TaskList[index].Status);
     }
 
     /// <summary>
