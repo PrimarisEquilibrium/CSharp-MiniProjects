@@ -34,9 +34,10 @@ while (true)
         case "update":
             // Update command contains an index and new content as arguments
             var (stringIndex, newContent) = Utils.ParseCommand(argument);
-            if (int.TryParse(stringIndex, out int index))
+            if (int.TryParse(stringIndex, out int updateIndex))
             {
-                tasks.UpdateTask(index - 1, newContent);
+                tasks.UpdateTask(updateIndex - 1, newContent);
+                Console.WriteLine("Successfully updated task.");
             }
             else
             {
@@ -44,23 +45,50 @@ while (true)
             }
             break;
         case "delete":
-            if (int.TryParse(argument, out int result))
+            if (int.TryParse(argument, out int deleteIndex))
             {
                 // Task number uses one-based indexing
                 // Convert to zero-based indexing
-                tasks.RemoveTask(result - 1);
+                tasks.RemoveTask(deleteIndex - 1);
+                Console.WriteLine("Successfully deleted task");
             }
             else
             {
                 Console.WriteLine("Couldn't parse `" + argument + "` into an integer.");
             }
-            Console.WriteLine("Successfully deleted task");
             break;
         case "mark-todo":
+            if (int.TryParse(argument, out int todoIndex))
+            {
+                tasks.MarkTodo(todoIndex - 1);
+                Console.WriteLine("Successfully marked task as `todo`");
+            }
+            else
+            {
+                Console.WriteLine("Couldn't parse `" + argument + "` into an integer.");
+            }
             break;
-        case "mark-inprogress":
+        case "mark-in-progress":
+            if (int.TryParse(argument, out int inprogressIndex))
+            {
+                tasks.MarkTodo(inprogressIndex - 1);
+                Console.WriteLine("Successfully marked task as `in-progress`");
+            }
+            else
+            {
+                Console.WriteLine("Couldn't parse `" + argument + "` into an integer.");
+            }
             break;
         case "mark-done":
+            if (int.TryParse(argument, out int doneIndex))
+            {
+                tasks.MarkTodo(doneIndex - 1);
+                Console.WriteLine("Successfully marked task as `done`");
+            }
+            else
+            {
+                Console.WriteLine("Couldn't parse `" + argument + "` into an integer.");
+            }
             break;
         default:
             Console.WriteLine("Invalid input, type `help` for valid commands.");
@@ -85,7 +113,7 @@ while (true)
             delete <index>
             view
             mark-todo <index>
-            mark-inprogress <index>
+            mark-in-progress <index>
             mark-done <index>
             exit
             ");

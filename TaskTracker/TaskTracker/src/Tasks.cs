@@ -62,6 +62,43 @@ public class TasksManager
     }
 
     /// <summary>
+    /// Sets the status of a task at the given index.
+    /// </summary>
+    /// <param name="index">The index of the task.</param>
+    /// <param name="status">The new status of the task.</param>
+    public void SetStatus(int index, TaskStatus status)
+    {
+        TaskList[index] = new Task(TaskList[index].Content, status);
+    }
+
+    /// <summary>
+    /// Marks the task to be `todo` at the given index.
+    /// </summary>
+    /// <param name="index">The index of the task.</param>
+    public void MarkTodo(int index)
+    {
+        SetStatus(index, TaskStatus.Todo);
+    }
+
+    /// <summary>
+    /// Marks the task to be `inprogress` at the given index.
+    /// </summary>
+    /// <param name="index">The index of the task.</param>
+    public void MarkInProgress(int index)
+    {
+        SetStatus(index, TaskStatus.Inprogress);
+    }
+
+    /// <summary>
+    /// Marks the task to be `done` at the given index.
+    /// </summary>
+    /// <param name="index">The index of the task.</param>
+    public void MarkDone(int index)
+    {
+        SetStatus(index, TaskStatus.Done);
+    }
+
+    /// <summary>
     /// Returns a list containing only the contents portion of all tasks.
     /// </summary>
     /// <returns>A contents list.</returns>
