@@ -114,7 +114,7 @@ public class TasksManager
     {
         for (var i = 0; i < TaskList.Count; i++)
         {
-            Console.WriteLine($"{i + 1}) {TaskList[i].Content}");
+            Console.WriteLine($"{i + 1}) {TaskList[i].Content} [{TaskList[i].Status}]");
         }
     }
 };
