@@ -23,20 +23,47 @@ while (true)
     }
 
     Console.WriteLine("[DEBUG]: `{cmd: " + command + "} {arg: " + argument + "}`");
+    tasks.DisplayTasks();
 
-    switch(command)
+    // Commands with arguments
+    if (argument != "")
+    {
+        switch(command)
     {
         case "add":
+            tasks.AddTask(argument);
+            Console.WriteLine("Successfully added task");
             break;
         case "update":
             break;
         case "delete":
-            break;
-        case "view":
+            if (int.TryParse(argument, out int result))
+            {
+                // Task number uses one-based indexing
+                // Convert to zero-based indexing
+                tasks.RemoveTaskByIndex(result - 1);
+            }
+            else
+            {
+                tasks.RemoveTaskByName(argument);
+            }
+            Console.WriteLine("Successfully deleted task");
             break;
         case "inprogress":
             break;
         case "complete":
+            break;
+        default:
+            Console.WriteLine("Invalid input, type `help` for valid commands.");
+            continue;
+        }
+    }
+    // Commands without arguments
+    else
+    {
+        switch(command)
+    {
+        case "view":
             break;
         case "exit":
             System.Environment.Exit(1);
@@ -54,12 +81,6 @@ while (true)
         default:
             Console.WriteLine("Invalid input, type `help` for valid commands.");
             continue;
+        }
     }
 }
-
-// add <task>
-// update <task/index>
-// delete <task/index>
-// view
-// inprogress <task/index>
-// complete <task/index>
