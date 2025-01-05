@@ -10,28 +10,39 @@ public static class Utils
     /// A tuple containing:
     /// <list type="bullet">
     /// <item><c>Command</c>: The main command extracted from the input string.</item>
-    /// <item><c>Argument</c>: The argument portion of the input string, or an empty string if no argument is provided.</item>
+    /// <item><c>IndexArgument</c>: The index argument portion of the input string, or -1 if no argument is provided.</item>
+    /// <item><c>StringArgument</c>: The string argument portion of the input string, or an empty string if no argument is provided.</item>
     /// </list>
     /// </returns>
-    public static (string Command, string Argument) ParseCommand(string rawCommand)
+    public static (string Command, int IndexArg, string StringArg) ParseCommand(string rawCommand)
     {
-        string command;
-        string argument;
+        string command = rawCommand;
+        int indexArg = -1;
+        string stringArg = "";
 
+        // Extract string argument
+        var indexOfStringStart = rawCommand.IndexOf('"');
+        if (indexOfStringStart != -1)
+        {
+            stringArg = rawCommand[(indexOfStringStart + 1)..^1];   
+
+            // Slice off the string argument portion of rawCommand, if it exists
+            rawCommand = rawCommand[..indexOfStringStart];
+        }
+
+        // Extract index argument
         var indexOfSpace = rawCommand.IndexOf(' ');
-
-        // indexOfSpace is -1 if the command is argumentless
         if (indexOfSpace != -1)
         {
+            if (int.TryParse(rawCommand[(indexOfSpace + 1)..], out int arg))
+            {
+                indexArg = arg;
+            }
+
+            // Extract command
             command = rawCommand[..indexOfSpace];
-            argument = rawCommand[(indexOfSpace + 1)..];
-        }
-        else
-        {
-            command = rawCommand;
-            argument = "";
         }
 
-        return (Command: command, Argument: argument);
+        return (Command: command, IndexArg: indexArg, StringArg: stringArg);
     }
 }
