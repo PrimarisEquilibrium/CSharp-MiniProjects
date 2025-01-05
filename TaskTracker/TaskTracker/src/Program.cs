@@ -47,11 +47,11 @@ while (true)
             Console.WriteLine("Successfully marked task as `todo`");
             break;
         case "mark-in-progress":
-            tasks.MarkTodo(indexArg);
+            tasks.MarkInProgress(indexArg);
             Console.WriteLine("Successfully marked task as `in-progress`");
             break;
         case "mark-done":
-            tasks.MarkTodo(indexArg);
+            tasks.MarkDone(indexArg);
             Console.WriteLine("Successfully marked task as `done`");
             break;
         case "view":
