@@ -28,7 +28,7 @@ public class TestTasks
     }
 
     [Fact]
-    public void CanRemoveTaskByIndex()
+    public void CanRemoveTask()
     {
         var task = new TasksManager();
 
@@ -36,14 +36,14 @@ public class TestTasks
         task.AddTask("y");
         task.AddTask("z");
 
-        task.RemoveTaskByIndex(1); // Removes y
+        task.RemoveTask(1); // Removes y
 
         var taskContents = task.GetTaskContents();
         Assert.DoesNotContain("y", taskContents);
     }
 
     [Fact]
-    public void CanRemoveMultipleTaskByIndex()
+    public void CanRemoveMultipleTask()
     {
         var task = new TasksManager();
 
@@ -51,7 +51,7 @@ public class TestTasks
         task.AddTask("y");
         task.AddTask("z");
 
-        task.RemoveTaskByIndex(1, 2); // Removes y and z
+        task.RemoveTask(1, 2); // Removes y and z
 
         var taskContents = task.GetTaskContents();
         Assert.DoesNotContain("y", taskContents);
@@ -59,7 +59,7 @@ public class TestTasks
     }
 
     [Fact]
-    public void CanRemoveTaskByName()
+    public void CanUpdateTask()
     {
         var task = new TasksManager();
 
@@ -67,27 +67,8 @@ public class TestTasks
         task.AddTask("y");
         task.AddTask("z");
 
-        task.RemoveTaskByName("z");
-
-        var taskContents = task.GetTaskContents();
-        Assert.DoesNotContain("z", taskContents);
-    }
-
-    [Fact]
-    public void CanRemoveMultipleTaskByName()
-    {
-        var task = new TasksManager();
-
-        task.AddTask("x");
-        task.AddTask("y");
-        task.AddTask("z");
-
-        task.RemoveTaskByName("x");
-        task.RemoveTaskByName("z");
-
-        var taskContents = task.GetTaskContents();
-        Assert.DoesNotContain("x", taskContents);
-        Assert.DoesNotContain("z", taskContents);
+        task.UpdateTask(0, "w");
+        Assert.Equal("w", task.TaskList[0].Content);
     }
 
     [Fact]
