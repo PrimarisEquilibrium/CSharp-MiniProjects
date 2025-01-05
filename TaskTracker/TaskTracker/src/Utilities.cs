@@ -20,7 +20,7 @@ public static class Utils
         int indexArg = -1;
         string stringArg = "";
 
-        // Extract string argument
+        // Extract string argument, if it exists
         var indexOfStringStart = rawCommand.IndexOf('"');
         if (indexOfStringStart != -1)
         {
@@ -30,7 +30,7 @@ public static class Utils
             rawCommand = rawCommand[..indexOfStringStart];
         }
 
-        // Extract index argument
+        // Extract index argument, if it exists
         var indexOfSpace = rawCommand.IndexOf(' ');
         if (indexOfSpace != -1)
         {

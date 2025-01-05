@@ -4,6 +4,16 @@ using TaskTracker.Tasks;
 Console.WriteLine("Task Tracker CLI Application");
 
 var tasks = new TasksManager();
+var helpString = @"
+add ""<task>""
+update <index> ""<newContent>""
+delete <index>
+view
+mark-todo <index>
+mark-in-progress <index>
+mark-done <index>
+exit
+";
 
 while (true)
 {
@@ -35,7 +45,18 @@ while (true)
             Console.WriteLine("Successfully added task");
             break;
         case "update":
-            tasks.UpdateTask(indexArg, stringArg);
+            try
+            {
+                tasks.UpdateTask(indexArg, stringArg);
+            }
+            catch (Exception e)
+            {
+                if (e is ArgumentOutOfRangeException || e is ArgumentException)
+                {
+                    Console.WriteLine(e.Message);
+                    continue;
+                }
+            }
             Console.WriteLine("Successfully updated task.");
             break;
         case "delete":
@@ -61,16 +82,7 @@ while (true)
             System.Environment.Exit(1);
             break;
         case "help":
-            Console.WriteLine(@"
-            add <task>
-            update <index> <newContent>
-            delete <index>
-            view
-            mark-todo <index>
-            mark-in-progress <index>
-            mark-done <index>
-            exit
-            ");
+            Console.WriteLine(helpString);
             break;
         default:
             Console.WriteLine("Invalid input, type `help` for valid commands.");

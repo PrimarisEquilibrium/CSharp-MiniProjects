@@ -58,6 +58,14 @@ public class TasksManager
     /// <param name="newContent">The new content of the task.</param>
     public void UpdateTask(int index, string newContent)
     {
+        if (string.IsNullOrWhiteSpace(newContent))
+        {
+            throw new ArgumentException("New content cannot be empty", nameof(newContent));
+        }
+        if (index < 0 || index >= TaskList.Count)
+        {
+            throw new ArgumentOutOfRangeException(nameof(index), "Index is out of range.");
+        }
         TaskList[index] = new Task(newContent, TaskList[index].Status);
     }
 
