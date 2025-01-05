@@ -1,6 +1,19 @@
+enum TaskStatus
+{
+    Incomplete,
+    Active,
+    Done
+}
+
+struct Task(string content, TaskStatus status)
+{
+    public string Content {get; set;} = content;
+    public TaskStatus Status {get; set;} = status;
+}
+
 class Tasks
 {
-    public List<string> TaskList {get;set;} = [];
+    public List<Task> TaskList = [];
 
     public Tasks() {}
 
@@ -12,7 +25,7 @@ class Tasks
     {
         foreach (var task in tasks)
         {
-            TaskList.Add(task);
+            TaskList.Add(new Task(task, TaskStatus.Incomplete));
         }
     }
 
@@ -41,8 +54,17 @@ class Tasks
     {
         foreach(var task in tasks)
         {
-            TaskList = TaskList.Where(t => t != task).ToList();
+            TaskList = TaskList.Where(t => t.Content != task).ToList();
         }
+    }
+
+    /// <summary>
+    /// Returns a list containing only the contents portion of all tasks.
+    /// </summary>
+    /// <returns>A contents list.</returns>
+    public List<string> GetTaskContents()
+    {
+        return TaskList.Select(task => task.Content).ToList();
     }
 
     /// <summary>
@@ -52,7 +74,7 @@ class Tasks
     {
         for (var i = 0; i < TaskList.Count; i++)
         {
-            Console.WriteLine($"{i + 1}) {TaskList[i]}");
+            Console.WriteLine($"{i + 1}) {TaskList[i].Content}");
         }
     }
 };

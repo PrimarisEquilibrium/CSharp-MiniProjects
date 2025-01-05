@@ -13,7 +13,8 @@ namespace TaskTrackerTests
 
             task.AddTask("x");
 
-            Assert.Contains("x", task.TaskList);
+            var taskContents = task.GetTaskContents();
+            Assert.Contains("x", taskContents);
         }
 
         [Fact]
@@ -23,8 +24,9 @@ namespace TaskTrackerTests
 
             task.AddTask("x", "y");
 
-            Assert.Contains("x", task.TaskList);
-            Assert.Contains("y", task.TaskList);
+            var taskContents = task.GetTaskContents();
+            Assert.Contains("x", taskContents);
+            Assert.Contains("y", taskContents);
         }
 
         [Fact]
@@ -38,7 +40,8 @@ namespace TaskTrackerTests
 
             task.RemoveTaskByIndex(1); // Removes y
 
-            Assert.DoesNotContain("y", task.TaskList);
+            var taskContents = task.GetTaskContents();
+            Assert.DoesNotContain("y", taskContents);
         }
 
         [Fact]
@@ -52,8 +55,9 @@ namespace TaskTrackerTests
 
             task.RemoveTaskByIndex(1, 2); // Removes y and z
 
-            Assert.DoesNotContain("y", task.TaskList);
-            Assert.DoesNotContain("z", task.TaskList);
+            var taskContents = task.GetTaskContents();
+            Assert.DoesNotContain("y", taskContents);
+            Assert.DoesNotContain("z", taskContents);
         }
 
         [Fact]
@@ -67,7 +71,8 @@ namespace TaskTrackerTests
 
             task.RemoveTaskByName("z");
 
-            Assert.DoesNotContain("z", task.TaskList);
+            var taskContents = task.GetTaskContents();
+            Assert.DoesNotContain("z", taskContents);
         }
 
         [Fact]
@@ -82,8 +87,9 @@ namespace TaskTrackerTests
             task.RemoveTaskByName("x");
             task.RemoveTaskByName("z");
 
-            Assert.DoesNotContain("x", task.TaskList);
-            Assert.DoesNotContain("z", task.TaskList);
+            var taskContents = task.GetTaskContents();
+            Assert.DoesNotContain("x", taskContents);
+            Assert.DoesNotContain("z", taskContents);
         }
 
         [Fact]
