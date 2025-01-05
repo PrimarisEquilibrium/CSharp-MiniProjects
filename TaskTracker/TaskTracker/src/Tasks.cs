@@ -1,5 +1,8 @@
 namespace TaskManager;
 
+/// <summary>
+/// An enum representing the status of a task.
+/// </summary>
 public enum TaskStatus
 {
     Incomplete,
@@ -51,7 +54,7 @@ public class Tasks
     /// <summary>
     /// Removes an arbitrary amount of tasks from the list by name/value.
     /// </summary>
-    /// <param name="task">The tasks to remove given their names.</param>
+    /// <param name="tasks">The tasks to remove given their names.</param>
     public void RemoveTaskByName(params string[] tasks)
     {
         foreach(var task in tasks)
