@@ -1,6 +1,20 @@
 ﻿using TaskTracker.Utilities;
 using TaskTracker.Tasks;
 
+
+static void ExecuteTaskAction(Action action, string successMessage)
+{
+    try
+    {
+        action();
+        Console.WriteLine("Successfully updated task.");
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+    }
+}
+
 Console.WriteLine("Task Tracker CLI Application");
 
 var tasks = new TasksManager();
@@ -53,23 +67,16 @@ while (true)
             Console.WriteLine("Successfully added task");
             break;
         case "update":
-            try
-            {
-                tasks.UpdateTask(indexArg, stringArg);
-            }
-            catch (Exception e)
-            {
-                if (e is ArgumentOutOfRangeException || e is ArgumentException)
-                {
-                    Console.WriteLine(e.Message);
-                    continue;
-                }
-            }
-            Console.WriteLine("Successfully updated task.");
+            ExecuteTaskAction(
+                () => tasks.UpdateTask(indexArg, stringArg),
+                "Successfully updated task."
+            );
             break;
         case "delete":
-            tasks.RemoveTask(indexArg);
-            Console.WriteLine("Successfully deleted task");
+            ExecuteTaskAction(
+                () => tasks.RemoveTask(indexArg),
+                "Successfully updated task."
+            );
             break;
         case "mark-todo":
             tasks.MarkTodo(indexArg);
