@@ -60,7 +60,7 @@ public class TasksManager
     {
         if (string.IsNullOrWhiteSpace(newContent))
         {
-            throw new ArgumentException("New content cannot be empty", nameof(newContent));
+            throw new ArgumentException("New content cannot be empty.", nameof(newContent));
         }
         if (index < 0 || index >= TaskList.Count)
         {

@@ -25,7 +25,15 @@ while (true)
 
     if (rawInput is not null)
     {
-        (command, indexArg, stringArg) = Utils.ParseCommand(rawInput);
+        try
+        {
+            (command, indexArg, stringArg) = Utils.ParseCommand(rawInput);
+        }
+        catch (ArgumentException e)
+        {
+            Console.WriteLine(e.Message);
+            continue;
+        }
 
         // Program requests user to provide indices using one-based indexing
         // Tasks class uses zero-based indexing
@@ -85,7 +93,7 @@ while (true)
             Console.WriteLine(helpString);
             break;
         default:
-            Console.WriteLine("Invalid input, type `help` for valid commands.");
+            Console.WriteLine("Invalid command, type `help` for valid commands.");
             continue;
     }
 }

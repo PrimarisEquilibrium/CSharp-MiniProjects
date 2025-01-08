@@ -16,31 +16,42 @@ public static class Utils
     /// </returns>
     public static (string Command, int IndexArg, string StringArg) ParseCommand(string rawCommand)
     {
-        string command = rawCommand;
+        var splitCommand = rawCommand.Split(' ', 3);
+
+        // Default initialization where rawCommand only supplies a Command
+        // No work needs to be done checking for an argumentless command
+        string command = splitCommand[0];
         int indexArg = -1;
         string stringArg = "";
 
-        // Extract string argument, if it exists
-        var indexOfStringStart = rawCommand.IndexOf('"');
-        if (indexOfStringStart != -1)
+        // Command and one argument are given
+        if (splitCommand.Length == 2)
         {
-            stringArg = rawCommand[(indexOfStringStart + 1)..^1];   
+            var argument = splitCommand[1];
 
-            // Slice off the string argument portion of rawCommand, if it exists
-            rawCommand = rawCommand[..indexOfStringStart];
-        }
-
-        // Extract index argument, if it exists
-        var indexOfSpace = rawCommand.IndexOf(' ');
-        if (indexOfSpace != -1)
-        {
-            if (int.TryParse(rawCommand[(indexOfSpace + 1)..], out int arg))
+            var firstQuoteIndex = argument.IndexOf('"');
+            var lastQuoteIndex = argument.LastIndexOf('"');
+            // String argument must be wrapped in double quotes
+            if (firstQuoteIndex != lastQuoteIndex && firstQuoteIndex < lastQuoteIndex && lastQuoteIndex == argument.Length - 1)
             {
-                indexArg = arg;
+                stringArg = argument;
             }
-
-            // Extract command
-            command = rawCommand[..indexOfSpace];
+            else
+            {
+                indexArg = int.TryParse(splitCommand[1], out int intArg)
+                    ? intArg
+                    // If argument fails to be parsed as an integer
+                    // it most likely is a syntactically incorrect string argument 
+                    : throw new ArgumentException("Command string argument must be wrapped in double quotes.", nameof(rawCommand));
+            }
+        }
+        // Command and all arguments are given
+        else if (splitCommand.Length == 3)
+        {
+            indexArg = int.TryParse(splitCommand[1], out int intArg)
+                ? intArg
+                : throw new ArgumentException("Failed to parse 'indexArg' to an integer.", nameof(rawCommand));
+            stringArg = splitCommand[2];
         }
 
         return (Command: command, IndexArg: indexArg, StringArg: stringArg);
