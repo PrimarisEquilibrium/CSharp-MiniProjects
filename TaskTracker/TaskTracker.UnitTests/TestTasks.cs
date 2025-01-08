@@ -36,7 +36,7 @@ public class TestTasks
         task.AddTask("y");
         task.AddTask("z");
 
-        task.RemoveTask(1); // Removes y
+        task.DeleteTask(1); // Removes y
 
         var taskContents = task.GetTaskContents();
         Assert.DoesNotContain("y", taskContents);
@@ -51,7 +51,7 @@ public class TestTasks
         task.AddTask("y");
         task.AddTask("z");
 
-        task.RemoveTask(1, 2); // Removes y and z
+        task.DeleteTask(1, 2); // Removes y and z
 
         var taskContents = task.GetTaskContents();
         Assert.DoesNotContain("y", taskContents);

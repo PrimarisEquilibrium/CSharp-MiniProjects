@@ -38,7 +38,7 @@ public class TasksManager
     /// Removes an arbitrary amount of tasks by indices.
     /// </summary>
     /// <param name="indices">The tasks to remove given their indices.</param>
-    public void RemoveTask(params int[] indices)
+    public void DeleteTask(params int[] indices)
     {
         var count = 0;
         foreach (var index in indices)

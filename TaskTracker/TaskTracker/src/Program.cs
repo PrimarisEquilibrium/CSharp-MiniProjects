@@ -74,7 +74,7 @@ while (true)
             break;
         case "delete":
             ExecuteTaskAction(
-                () => tasks.RemoveTask(indexArg),
+                () => tasks.DeleteTask(indexArg),
                 "Successfully removed task."
             );
             break;
