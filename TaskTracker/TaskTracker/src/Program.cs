@@ -75,7 +75,7 @@ while (true)
         case "delete":
             ExecuteTaskAction(
                 () => tasks.RemoveTask(indexArg),
-                "Successfully updated task."
+                "Successfully removed task."
             );
             break;
         case "mark-todo":
